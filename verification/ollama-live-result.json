@@ -1,0 +1,26 @@
+{
+  "model": "llama3.2:1b",
+  "local_capabilities": [
+    "completion",
+    "tools"
+  ],
+  "remote_model": null,
+  "remote_host": null,
+  "elapsed_seconds": 27.14,
+  "valid_native_tool_turns": 1,
+  "status": "deterministic_fallback",
+  "root_cause_status": "Unconfirmed",
+  "failure_reason": "Not captured on final retest; not inferred",
+  "schema_fix": "Planner exposes only the current incident ID",
+  "downloads_or_installs": false,
+  "latest_advanced_trial": {
+    "elapsed_seconds": 21.17,
+    "accepted_native_tool_turns": 0,
+    "status": "deterministic_fallback",
+    "error_category": "ValueError",
+    "separate_diagnostic": "Attempted incident switch rejected",
+    "regression_tests_passed": 37,
+    "max_planner_seconds": 90,
+    "max_request_seconds": 30
+  }
+}

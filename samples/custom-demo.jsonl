@@ -1,0 +1,2 @@
+{"timestamp":"2026-10-11T10:00:00Z","service":"checkout","level":"ERROR","message":"pool_exhausted wait_ms=5000","correlation_id":"demo-1"}
+{"timestamp":"2026-10-11T10:00:02Z","service":"checkout","level":"ERROR","message":"upstream_timeout","correlation_id":"demo-1"}

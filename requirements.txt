@@ -1,0 +1,2 @@
+# The baseline uses only the Python standard library. Nothing to install.
+# Ollama is optional, separately installed, and is never started/downloaded by this app.

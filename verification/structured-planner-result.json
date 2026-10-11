@@ -1,0 +1,18 @@
+{
+  "model": "llama3.2:1b",
+  "incident_id": "INC-1001",
+  "strategy": "structured",
+  "elapsed_seconds": 40.55,
+  "planner_decisions": [
+    "search_logs",
+    "get_incident_timeline",
+    "search_runbooks",
+    "get_sample_service_status"
+  ],
+  "planner_notes": [],
+  "fallback": false,
+  "root_cause_status": "Unconfirmed",
+  "remediation_enabled": false,
+  "regression_tests_passed": 43,
+  "scope": "One live synthetic incident only; broader reliability pending"
+}

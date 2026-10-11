@@ -1,0 +1,44 @@
+[
+  {
+    "incident_id": "INC-1002",
+    "elapsed_seconds": 22.22,
+    "planner_decisions": [
+      "search_logs",
+      "get_incident_timeline",
+      "search_runbooks",
+      "get_sample_service_status"
+    ],
+    "planner_notes": [],
+    "root_cause_status": "Unconfirmed",
+    "confidence": "High",
+    "remediation_enabled": false
+  },
+  {
+    "incident_id": "INC-1003",
+    "elapsed_seconds": 12.62,
+    "planner_decisions": [
+      "search_logs",
+      "get_incident_timeline",
+      "search_runbooks",
+      "get_sample_service_status"
+    ],
+    "planner_notes": [],
+    "root_cause_status": "Unconfirmed",
+    "confidence": "Low",
+    "remediation_enabled": false
+  },
+  {
+    "incident_id": "INC-1004",
+    "elapsed_seconds": 14.59,
+    "planner_decisions": [
+      "search_logs",
+      "get_incident_timeline",
+      "search_runbooks",
+      "get_sample_service_status"
+    ],
+    "planner_notes": [],
+    "root_cause_status": "Unconfirmed",
+    "confidence": "Medium",
+    "remediation_enabled": false
+  }
+]

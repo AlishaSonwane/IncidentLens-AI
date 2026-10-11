@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IncidentLens AI · Alisha</title><link rel="stylesheet" href="/ui.css"><script src="/ui.js" defer></script></head>
+<body>
+<header><a class="brand" href="/">IncidentLens <span>AI</span></a><div class="header-meta">LOCAL WORKSPACE <span class="status">Read-only</span></div></header>
+<main>
+<section class="intro"><div class="eyebrow">INCIDENT TRIAGE & ROOT CAUSE ANALYSIS</div>
+<h1>From scattered signals<br>to a defensible explanation.</h1>
+<p>Trace the failure, test the hypothesis, and keep every conclusion connected to its evidence.</p>
+<div class="mode-note">Samples + local log imports · No live infrastructure · No automatic remediation</div></section>
+<section class="workspace">
+<aside><div class="section-label">01 / SELECT AN INCIDENT</div><h2>Investigation queue</h2>
+<p class="muted">Four synthetic scenarios plus your validated local imports.</p><div id="queue" aria-label="Sample incidents"></div>
+<details class="local-controls"><summary>Import custom logs</summary>
+<p class="muted">JSONL or timestamp | service | level | message | correlation_id. Timezone required. Maximum 200 events / 512 KB. Known secrets are masked before local storage; review logs yourself because masking is best effort.</p>
+<label for="import-title">Incident title</label><input id="import-title" maxlength="120" placeholder="Checkout errors">
+<label for="import-file">Choose UTF-8 log file (optional)</label><input id="import-file" type="file" accept=".txt,.log,.jsonl">
+<label for="import-content">Log content</label><textarea id="import-content" rows="6" placeholder="2026-10-11T10:00:00Z | checkout | ERROR | pool_exhausted | req-1"></textarea>
+<button id="import-logs" class="secondary">Validate &amp; import locally</button></details>
+<details class="local-controls"><summary>Saved investigations</summary><p class="muted">Saved on this computer. Select two snapshots to compare; reopening does not run AI.</p>
+<button id="refresh-history" class="secondary">Refresh history</button><div id="history"></div>
+<button id="compare-history" class="secondary">Compare selected (2)</button><div id="comparison" role="status"></div></details>
+<p id="workspace-status" class="muted" role="status"></p>
+<div class="ownership">Original project by <strong>Alisha</strong><br><span>IncidentLens AI · MIT · v0.1.0</span></div></aside>
+<div class="report-area">
+<div id="loading" class="loading" role="status">Loading sample investigations…</div>
+<div id="error" class="error" role="alert" hidden></div>
+<article id="report" hidden>
+<div class="report-top"><div><div class="section-label">02 / EVIDENCE REPORT</div><h2 id="report-title"></h2><p id="report-id" class="muted"></p></div>
+<div class="exports"><button id="save-report" class="secondary">Save investigation</button><button id="export-md" class="secondary">Export Markdown</button><button id="export-json" class="secondary">Export JSON</button></div></div>
+<section class="ai-controls"><button id="run-ai" class="secondary">Local AI investigation</button>
+<span class="muted">Existing llama3.2:1b only · Read-only tools · May take up to 90 seconds</span>
+<p id="planner-status" role="status" class="muted">Sample view: no model inference.</p></section>
+<div class="report-stats"><div><span>TRIAGE</span><strong id="priority"></strong><small>Human review required</small></div>
+<div><span>ROOT CAUSE</span><strong>Unconfirmed</strong><small>Mechanism ≠ underlying cause</small></div>
+<div><span>TOOL CALLS</span><strong id="tool-count"></strong><small>Read-only evidence tools</small></div></div>
+<section class="finding"><div class="section-label">LIKELY FAILURE MECHANISM</div><h3 id="mechanism"></h3>
+<p id="mechanism-reason"></p><div id="mechanism-confidence" class="confidence"></div></section>
+<div class="tabs" role="tablist" aria-label="Investigation report sections">
+<button role="tab" id="tab-analysis" aria-controls="panel-analysis" aria-selected="true" data-tab="analysis">Analysis</button>
+<button role="tab" id="tab-timeline" aria-controls="panel-timeline" aria-selected="false" tabindex="-1" data-tab="timeline">Timeline</button>
+<button role="tab" id="tab-evidence" aria-controls="panel-evidence" aria-selected="false" tabindex="-1" data-tab="evidence">Evidence</button>
+<button role="tab" id="tab-audit" aria-controls="panel-audit" aria-selected="false" tabindex="-1" data-tab="audit">Tool audit</button></div>
+<div id="panel-analysis" class="panel" role="tabpanel" aria-labelledby="tab-analysis">
+<h3>Observed facts</h3><p id="summary"></p><div id="facts"></div>
+<h3>Ranked hypotheses</h3><div id="hypotheses"></div>
+<div class="two-column"><section><h3>Missing evidence</h3><ul id="missing"></ul></section><section><h3>Next safe checks</h3><ul id="next-checks"></ul></section></div>
+<section class="runbook-search"><h3>Find a runbook</h3><p class="muted">Local keyword ranking with synonyms and service context. No embeddings or paid service.</p><label for="runbook-query">Search words</label><input id="runbook-query" maxlength="300" placeholder="database pool exhaustion"><button id="search-runbooks" class="secondary">Search runbooks</button><div id="runbook-results"></div></section>
+<h3>Service dependencies</h3><div id="dependencies"></div><h3>Correlated requests</h3><div id="correlations"></div></div>
+<div id="panel-timeline" class="panel" role="tabpanel" aria-labelledby="tab-timeline" hidden><h3>Incident timeline <span class="muted">UTC</span></h3><div id="timeline"></div></div>
+<div id="panel-evidence" class="panel" role="tabpanel" aria-labelledby="tab-evidence" hidden><h3>Source evidence</h3><p class="muted">Stable IDs and source hashes make each claim reviewable. Imported hashes cover normalized sanitized events, not the original file.</p><div id="evidence"></div><h3>Source SHA-256</h3><div id="hashes"></div></div>
+<div id="panel-audit" class="panel" role="tabpanel" aria-labelledby="tab-audit" hidden><h3>Investigation trace</h3><p id="audit-mode" class="muted"></p><div id="planner-trace"></div><div id="audit"></div></div>
+<section class="safety"><div class="section-label">HUMAN CONTROL</div><h3>Recommendations never execute themselves.</h3><p id="policy"></p></section>
+<p class="footnote">Confidence is a heuristic label, not a probability. Customer impact is unknown. Synthetic signals do not establish production causality.</p>
+</article></div></section>
+</main><footer>IncidentLens AI <span>Built by Alisha · Original implementation · Local evidence investigation</span></footer>
+</body></html>

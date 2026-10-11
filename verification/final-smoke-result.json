@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "checks": [
+    "Windows launcher served the app on loopback port 8766",
+    "Browser entry point includes import and history controls",
+    "All 5 persisted sample/custom catalog entries generated reports with Markdown evidence and no remediation",
+    "All 3 saved reports reopened after a fresh server launch",
+    "Ranked runbook query returned the pool runbook first"
+  ],
+  "scope": "Local prototype handoff; no model inference, real incident data or remediation."
+}

@@ -1,0 +1,11 @@
+[project]
+name = "incidentlens-ai"
+version = "0.1.0"
+description = "Local evidence-based incident triage and RCA with read-only sample tools"
+requires-python = ">=3.10"
+authors = [{name = "Alisha"}]
+license = {text = "MIT"}
+dependencies = []
+
+[project.scripts]
+incidentlens = "incidentlens.cli:main"

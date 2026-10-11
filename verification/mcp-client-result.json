@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "protocol": "2025-06-18",
+  "checks": [
+    "Protocol negotiation and matching response IDs",
+    "No response to initialized notification; ping works",
+    "Four read-only tools discovered",
+    "Client called search_logs; structured/text results agree",
+    "Client called get_incident_timeline; structured/text results agree",
+    "Client called search_runbooks; structured/text results agree",
+    "Client called get_sample_service_status; structured/text results agree",
+    "Destructive tool rejected",
+    "Path-like incident ID rejected"
+  ],
+  "client": "Independent standard-library subprocess client",
+  "limitation": "Not external SDK/MCP Inspector certification."
+}

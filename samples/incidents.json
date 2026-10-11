@@ -1,0 +1,335 @@
+[
+  {
+    "id": "INC-1001",
+    "title": "Checkout errors after a database pool fills",
+    "description": "Follow a request across checkout and orders; separate the failure mechanism from its unknown trigger.",
+    "scenario": "Pool saturation",
+    "services": [
+      "checkout-api",
+      "orders-api",
+      "orders-db"
+    ],
+    "dependencies": [
+      {
+        "from": "checkout-api",
+        "to": "orders-api"
+      },
+      {
+        "from": "orders-api",
+        "to": "orders-db"
+      }
+    ],
+    "events": [
+      {
+        "id": "E-1001-01",
+        "timestamp": "2026-10-01T09:00:00Z",
+        "service": "checkout-api",
+        "level": "INFO",
+        "message": "request_started route=/checkout",
+        "correlation_id": "req-901",
+        "kind": "log"
+      },
+      {
+        "id": "E-1001-02",
+        "timestamp": "2026-10-01T09:00:01Z",
+        "service": "orders-api",
+        "level": "ERROR",
+        "message": "pool_exhausted wait_ms=5000 pool=orders",
+        "correlation_id": "req-901",
+        "kind": "log"
+      },
+      {
+        "id": "E-1001-03",
+        "timestamp": "2026-10-01T09:00:06Z",
+        "service": "checkout-api",
+        "level": "ERROR",
+        "message": "upstream_timeout upstream=orders-api status=504",
+        "correlation_id": "req-901",
+        "kind": "log"
+      },
+      {
+        "id": "E-1001-04",
+        "timestamp": "2026-10-01T09:00:30Z",
+        "service": "orders-api",
+        "level": "ERROR",
+        "message": "pool_exhausted wait_ms=5000 pool=orders",
+        "correlation_id": "req-902",
+        "kind": "log"
+      },
+      {
+        "id": "E-1001-05",
+        "timestamp": "2026-10-01T09:00:35Z",
+        "service": "checkout-api",
+        "level": "ERROR",
+        "message": "upstream_timeout upstream=orders-api status=504",
+        "correlation_id": "req-902",
+        "kind": "log"
+      },
+      {
+        "id": "E-1001-06",
+        "timestamp": "2026-10-01T09:01:00Z",
+        "service": "orders-api",
+        "level": "WARN",
+        "message": "slow_query elapsed_ms=18000 fingerprint=Q17",
+        "correlation_id": "req-903",
+        "kind": "log"
+      },
+      {
+        "id": "E-1001-07",
+        "timestamp": "2026-10-01T09:01:05Z",
+        "service": "orders-api",
+        "level": "ERROR",
+        "message": "pool_exhausted wait_ms=5000 pool=orders",
+        "correlation_id": "req-903",
+        "kind": "log"
+      },
+      {
+        "id": "E-1001-08",
+        "timestamp": "2026-10-01T09:01:10Z",
+        "service": "checkout-api",
+        "level": "ERROR",
+        "message": "upstream_timeout upstream=orders-api status=504",
+        "correlation_id": "req-903",
+        "kind": "log"
+      },
+      {
+        "id": "E-1001-09",
+        "timestamp": "2026-10-01T09:02:00Z",
+        "service": "orders-api",
+        "level": "INFO",
+        "message": "request_complete status=200 elapsed_ms=210",
+        "correlation_id": "req-904",
+        "kind": "log"
+      }
+    ],
+    "snapshots": [
+      {
+        "id": "S-1001-01",
+        "timestamp": "2026-10-01T09:00:31Z",
+        "service": "orders-db",
+        "message": "pool_active=20 pool_limit=20 pool_waiters=12",
+        "kind": "snapshot",
+        "status": "degraded",
+        "pool_active": 20,
+        "pool_limit": 20,
+        "pool_waiters": 12
+      },
+      {
+        "id": "S-1001-02",
+        "timestamp": "2026-10-01T09:02:00Z",
+        "service": "orders-db",
+        "message": "pool_active=8 pool_limit=20 pool_waiters=0 recovery snapshot",
+        "kind": "snapshot",
+        "status": "healthy",
+        "pool_active": 8,
+        "pool_limit": 20,
+        "pool_waiters": 0
+      }
+    ],
+    "changes": []
+  },
+  {
+    "id": "INC-1002",
+    "title": "Checkout cannot reach payments after a deployment",
+    "description": "A deployment precedes connection errors. Timing suggests a candidate trigger, not proof.",
+    "scenario": "Deployment correlation",
+    "services": [
+      "checkout-api",
+      "payments-api"
+    ],
+    "dependencies": [
+      {
+        "from": "checkout-api",
+        "to": "payments-api"
+      }
+    ],
+    "events": [
+      {
+        "id": "E-1002-01",
+        "timestamp": "2026-10-01T09:00:10Z",
+        "service": "payments-api",
+        "level": "WARN",
+        "message": "readiness_pending port=8080 version=v2.4.0",
+        "correlation_id": "",
+        "kind": "log"
+      },
+      {
+        "id": "E-1002-02",
+        "timestamp": "2026-10-01T09:00:20Z",
+        "service": "checkout-api",
+        "level": "ERROR",
+        "message": "connection_refused upstream=payments-api port=8080",
+        "correlation_id": "req-701",
+        "kind": "log"
+      },
+      {
+        "id": "E-1002-03",
+        "timestamp": "2026-10-01T09:00:21Z",
+        "service": "checkout-api",
+        "level": "ERROR",
+        "message": "upstream_timeout upstream=payments-api status=502",
+        "correlation_id": "req-701",
+        "kind": "log"
+      },
+      {
+        "id": "E-1002-04",
+        "timestamp": "2026-10-01T09:00:40Z",
+        "service": "checkout-api",
+        "level": "ERROR",
+        "message": "connection_refused upstream=payments-api port=8080",
+        "correlation_id": "req-702",
+        "kind": "log"
+      },
+      {
+        "id": "E-1002-05",
+        "timestamp": "2026-10-01T09:01:00Z",
+        "service": "payments-api",
+        "level": "WARN",
+        "message": "readiness_pending port=8080 version=v2.4.0",
+        "correlation_id": "",
+        "kind": "log"
+      }
+    ],
+    "snapshots": [
+      {
+        "id": "S-1002-01",
+        "timestamp": "2026-10-01T09:00:30Z",
+        "service": "payments-api",
+        "message": "readiness=false listener_8080=false",
+        "kind": "snapshot",
+        "status": "unavailable"
+      }
+    ],
+    "changes": [
+      {
+        "id": "C-1002-01",
+        "timestamp": "2026-10-01T09:00:00Z",
+        "service": "payments-api",
+        "kind": "change",
+        "message": "deployment version=v2.3.9 -> v2.4.0; configuration diff unavailable"
+      }
+    ]
+  },
+  {
+    "id": "INC-1003",
+    "title": "Intermittent checkout errors with incomplete evidence",
+    "description": "Practise an honest 'root cause unconfirmed' result; missing metrics cannot be guessed.",
+    "scenario": "Insufficient evidence",
+    "services": [
+      "checkout-api",
+      "payments-api"
+    ],
+    "dependencies": [
+      {
+        "from": "checkout-api",
+        "to": "payments-api"
+      }
+    ],
+    "events": [
+      {
+        "id": "E-1003-01",
+        "timestamp": "2026-10-01T09:00:00Z",
+        "service": "checkout-api",
+        "level": "INFO",
+        "message": "request_started route=/checkout",
+        "correlation_id": "req-501",
+        "kind": "log"
+      },
+      {
+        "id": "E-1003-02",
+        "timestamp": "2026-10-01T09:00:15Z",
+        "service": "checkout-api",
+        "level": "ERROR",
+        "message": "request_failed status=500 reason=unknown",
+        "correlation_id": "req-501",
+        "kind": "log"
+      },
+      {
+        "id": "E-1003-03",
+        "timestamp": "2026-10-01T09:00:40Z",
+        "service": "checkout-api",
+        "level": "INFO",
+        "message": "request_complete status=200 elapsed_ms=120",
+        "correlation_id": "req-502",
+        "kind": "log"
+      }
+    ],
+    "snapshots": [],
+    "changes": []
+  },
+  {
+    "id": "INC-1004",
+    "title": "Pool errors conflict with a healthy status snapshot",
+    "description": "Contradicting telemetry lowers confidence and must remain visible in the report.",
+    "scenario": "Conflicting evidence",
+    "services": [
+      "checkout-api",
+      "orders-api",
+      "orders-db"
+    ],
+    "dependencies": [
+      {
+        "from": "checkout-api",
+        "to": "orders-api"
+      },
+      {
+        "from": "orders-api",
+        "to": "orders-db"
+      }
+    ],
+    "events": [
+      {
+        "id": "E-1004-01",
+        "timestamp": "2026-10-01T09:00:00Z",
+        "service": "orders-api",
+        "level": "ERROR",
+        "message": "pool_exhausted wait_ms=5000 pool=orders",
+        "correlation_id": "req-801",
+        "kind": "log"
+      },
+      {
+        "id": "E-1004-02",
+        "timestamp": "2026-10-01T09:00:30Z",
+        "service": "checkout-api",
+        "level": "ERROR",
+        "message": "upstream_timeout upstream=orders-api status=504",
+        "correlation_id": "req-801",
+        "kind": "log"
+      },
+      {
+        "id": "E-1004-03",
+        "timestamp": "2026-10-01T09:01:00Z",
+        "service": "orders-api",
+        "level": "ERROR",
+        "message": "pool_exhausted wait_ms=5000 pool=orders",
+        "correlation_id": "req-802",
+        "kind": "log"
+      }
+    ],
+    "snapshots": [
+      {
+        "id": "S-1004-01",
+        "timestamp": "2026-10-01T09:00:10Z",
+        "service": "orders-db",
+        "message": "pool_active=20 pool_limit=20 pool_waiters=8",
+        "kind": "snapshot",
+        "status": "degraded",
+        "pool_active": 20,
+        "pool_limit": 20,
+        "pool_waiters": 8
+      },
+      {
+        "id": "S-1004-02",
+        "timestamp": "2026-10-01T09:00:30Z",
+        "service": "orders-db",
+        "message": "pool_active=4 pool_limit=20 pool_waiters=0 during failure window",
+        "kind": "snapshot",
+        "status": "healthy",
+        "pool_active": 4,
+        "pool_limit": 20,
+        "pool_waiters": 0
+      }
+    ],
+    "changes": []
+  }
+]

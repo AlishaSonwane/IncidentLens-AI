@@ -1,0 +1,2 @@
+2026-10-11T10:00:00Z | checkout | ERROR | pool_exhausted token=demo-placeholder | demo-1
+2026-10-11T10:00:02Z | checkout | ERROR | upstream_timeout | demo-1

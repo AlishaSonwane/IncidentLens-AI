@@ -1,0 +1,20 @@
+{
+  "incident_id": "CUSTOM-78808bb47017d50b76de",
+  "model": "llama3.2:1b",
+  "elapsed_seconds": 44.03,
+  "planner_decisions": [
+    "search_logs",
+    "get_incident_timeline",
+    "search_runbooks",
+    "get_sample_service_status"
+  ],
+  "planner_notes": [],
+  "tool_count": 4,
+  "root_cause_status": "Unconfirmed",
+  "evidence_citations_valid": true,
+  "redaction_retained": true,
+  "saved_snapshot_exact_match": true,
+  "markdown_trace_preserved": true,
+  "remediation_enabled": false,
+  "snapshot_id": "5291f11ac39541cf8b5c199451f34b83"
+}

@@ -1,0 +1,72 @@
+{
+  "checked_at": "2026-10-11T15:45:29.846431+00:00",
+  "incident_id": "CUSTOM-78808bb47017d50b76de",
+  "model": "llama3.2:1b",
+  "strategy": "structured",
+  "runs": [
+    {
+      "run": 1,
+      "elapsed_seconds": 9.64,
+      "checks": {
+        "same_evidence_analysis": true,
+        "correct_incident_read_only_calls": true,
+        "all_fact_citations_resolve": true,
+        "remediation_disabled": true,
+        "root_cause_unconfirmed": true,
+        "known_secret_masked": true,
+        "unique_four_planner_decisions": true,
+        "no_fallback": true
+      },
+      "planner_decisions": [
+        "search_logs",
+        "get_incident_timeline",
+        "search_runbooks",
+        "get_sample_service_status"
+      ],
+      "planner_notes": []
+    },
+    {
+      "run": 2,
+      "elapsed_seconds": 4.72,
+      "checks": {
+        "same_evidence_analysis": true,
+        "correct_incident_read_only_calls": true,
+        "all_fact_citations_resolve": true,
+        "remediation_disabled": true,
+        "root_cause_unconfirmed": true,
+        "known_secret_masked": true,
+        "unique_four_planner_decisions": true,
+        "no_fallback": true
+      },
+      "planner_decisions": [
+        "search_logs",
+        "get_incident_timeline",
+        "search_runbooks",
+        "get_sample_service_status"
+      ],
+      "planner_notes": []
+    },
+    {
+      "run": 3,
+      "elapsed_seconds": 4.95,
+      "checks": {
+        "same_evidence_analysis": true,
+        "correct_incident_read_only_calls": true,
+        "all_fact_citations_resolve": true,
+        "remediation_disabled": true,
+        "root_cause_unconfirmed": true,
+        "known_secret_masked": true,
+        "unique_four_planner_decisions": true,
+        "no_fallback": true
+      },
+      "planner_decisions": [
+        "search_logs",
+        "get_incident_timeline",
+        "search_runbooks",
+        "get_sample_service_status"
+      ],
+      "planner_notes": []
+    }
+  ],
+  "scope": "Three sequential trials on the same synthetic custom import; not production reliability or cold-start benchmarking."
+}

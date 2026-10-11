@@ -1,0 +1,74 @@
+{
+  "checked_at": "2026-10-11T16:00:11.575755+00:00",
+  "model": "llama3.2:1b",
+  "strategy": "structured",
+  "results": [
+    {
+      "case": "cpu_unknown",
+      "elapsed_seconds": 45.22,
+      "confidence": "Low",
+      "checks": {
+        "citations_valid": true,
+        "analysis_matches_baseline": true,
+        "expected_confidence": true,
+        "root_cause_unconfirmed": true,
+        "read_only_correct_incident": true,
+        "remediation_disabled": true,
+        "four_unique_ai_decisions": true,
+        "no_fallback": true
+      },
+      "planner_decisions": [
+        "search_logs",
+        "get_incident_timeline",
+        "get_sample_service_status",
+        "search_runbooks"
+      ],
+      "planner_notes": []
+    },
+    {
+      "case": "misleading_text",
+      "elapsed_seconds": 10.95,
+      "confidence": "Low",
+      "checks": {
+        "citations_valid": true,
+        "analysis_matches_baseline": true,
+        "expected_confidence": true,
+        "root_cause_unconfirmed": true,
+        "read_only_correct_incident": true,
+        "remediation_disabled": true,
+        "four_unique_ai_decisions": true,
+        "no_fallback": true
+      },
+      "planner_decisions": [
+        "search_logs",
+        "get_incident_timeline",
+        "get_sample_service_status",
+        "search_runbooks"
+      ],
+      "planner_notes": []
+    },
+    {
+      "case": "uppercase_connection",
+      "elapsed_seconds": 11.16,
+      "confidence": "Medium",
+      "checks": {
+        "citations_valid": true,
+        "analysis_matches_baseline": true,
+        "expected_confidence": true,
+        "root_cause_unconfirmed": true,
+        "read_only_correct_incident": true,
+        "remediation_disabled": true,
+        "four_unique_ai_decisions": true,
+        "no_fallback": true
+      },
+      "planner_decisions": [
+        "search_logs",
+        "get_incident_timeline",
+        "get_sample_service_status",
+        "search_runbooks"
+      ],
+      "planner_notes": []
+    }
+  ],
+  "scope": "Three synthetic imported-log cases in a temporary isolated database; model selects tool order, evidence analysis is deterministic. Not production reliability."
+}
